@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Add = () => {
-  
+  const deployedHost = "https://bookapp2024-401e9436e711.herokuapp.com";
+  const localHost = "http://localhost:8800";
   const [book,setBook] = useState({
     title:"",
     description:"",
@@ -22,7 +23,8 @@ const Add = () => {
     e.preventDefault()
 
     try{
-      await axios.post("http://localhost:8800/books", book)
+      await axios.post(deployedHost+"/books", book)
+      // await axios.post(localHost+"/books", book)
       navigate("/")
 
     }catch(err){

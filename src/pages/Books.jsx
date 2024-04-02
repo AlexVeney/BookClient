@@ -5,12 +5,15 @@ import { Link } from 'react-router-dom'
 
 const Books = () => {
 
+  const deployedHost = "https://bookapp2024-401e9436e711.herokuapp.com";
+  const localHost = "http://localhost:8800";
+
   const [books, setBooks] = useState([])
 
   useEffect(()=>{
     const fetchAllBooks = async ()=>{
       try{
-        const res = await axios.get("http://localhost:8800/books/")
+        const res = await axios.get(deployedHost+"/books/")
         //console.log(res)
         setBooks(res.data)
       }catch(err){
@@ -22,7 +25,7 @@ const Books = () => {
 
   const handleDelete = async (id)=>{
     try{
-      await axios.delete("http://localhost:8800/books/"+id)
+      await axios.delete(deployedHost+"/books/"+id)
       window.location.reload()
     }catch(err){
       console.log(err)

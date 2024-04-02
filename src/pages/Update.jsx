@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 const Update = () => {
-  
+  const deployedHost = "https://bookapp2024-401e9436e711.herokuapp.com";
+  const localHost = "http://localhost:8800";
   const {id} = useParams();
   const [book,setBook] = useState({
     title:'',
@@ -16,7 +17,7 @@ const Update = () => {
   useEffect(()=>{
     const fetchBook = async ()=>{
       try{
-        const res = await axios.get('http://localhost:8800/books/'+id);
+        const res = await axios.get(deployedHost+'/books/'+id);
         //console.log(res.data[0]);
         setBook(res.data[0]);
       }catch(err){
@@ -38,7 +39,7 @@ const Update = () => {
     e.preventDefault()
 
     try{
-      await axios.put("http://localhost:8800/books/"+id, book)
+      await axios.put(deployedHost+"/books/"+id, book)
       navigate("/")
 
     }catch(err){
